@@ -34,8 +34,6 @@ This tool automates the entire brand brief creation process, generating:
 3. **Run workflow**: `/run 00_master_workflow.md`
 4. **Review outputs** in the generated folders
 
-**[View Interactive Instructions](usage_instructions.html)** | **[Quickstart Checklist](quickstart_checklist.html)**
-
 ## Requirements
 
 - **Cursor Desktop** with MCP servers:
