@@ -72,7 +72,7 @@ Each step builds on previous outputs, ensuring comprehensive and coherent result
 
 ---
 
-**Ready to generate your first brand brief?** Start with the [Quickstart Checklist](quickstart_checklist.html) or dive into the [Detailed Instructions](usage_instructions.html).
+**Ready to generate your first brand brief?**Download the brand brief generator repo today!
 
 ---
 
