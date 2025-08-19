@@ -155,7 +155,7 @@ File must include:
 
 ---
 
-### Iteration Clause (Critical)
+### Step 8 - Iteration Clause (Critical)
 After completing each step:  
 
 1. **Review depth**: If any section has fewer than the required details (sentences, examples, proof points), expand automatically.  
