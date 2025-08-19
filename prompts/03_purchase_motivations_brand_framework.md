@@ -20,6 +20,18 @@
 
 ---
 
+### Report Header Standard
+- Always use **RUN_DATE** and **BRAND_NAME** provided by the workflow.
+- If RUN_DATE is not explicitly passed, parse it from the output folder path `/outputs/{{YYYY-MM-DD}}_{{BRAND_NAME}}/`.
+- Never take the date or brand name from examples, sources, or defaults.
+
+The report header must always begin:
+
+**Date:** {{RUN_DATE}}  
+**Brand:** {{BRAND_NAME}}
+
+---
+
 ## Research Objective
 
 Translate psychological, emotional, and competitive data into a **usable brand framework**.  
@@ -116,10 +128,6 @@ Save the **full detailed research deliverable** into the outputs folder.
 **Path:**  
 /outputs/{{YYYY-MM-DD}}_{{BRAND_NAME}}/03_purchase_motivation_framework_output.md
 
-markdown
-Copy
-Edit
-
 **File must include:**  
 - Full Motivation Map  
 - Objection Matrix  
@@ -129,6 +137,11 @@ Edit
 - Complete references and contextual notes  
 
 Do **not** prune down details in this file — it should capture the **entire depth** of Prompt 3’s work.
+
+- Before saving, validate that the header contains:
+  - **Date:** {{RUN_DATE}}
+  - **Brand:** {{BRAND_NAME}}
+- If not, correct automatically.
 
 ---
 

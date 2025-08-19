@@ -2,6 +2,12 @@
 **Master Orchestration Workflow for Brand Brief Generator**
 ---
 
+## Run Metadata (single source of truth)
+- BRAND_NAME: {{BRAND_NAME}}   <!-- replace at runtime -->
+- RUN_DATE: {{RUN_DATE}}       <!-- YYYY-MM-DD; either auto from folder name or set manually -->
+
+---
+
 ## Execution Block (Run the Full Workflow)
 
 **Command to Run in Cursor:**

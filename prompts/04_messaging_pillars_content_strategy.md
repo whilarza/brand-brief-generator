@@ -23,6 +23,18 @@
 
 ---
 
+### Report Header Standard
+- Always use **RUN_DATE** and **BRAND_NAME** provided by the workflow.
+- If RUN_DATE is not explicitly passed, parse it from the output folder path `/outputs/{{YYYY-MM-DD}}_{{BRAND_NAME}}/`.
+- Never take the date or brand name from examples, sources, or defaults.
+
+The report header must always begin:
+
+**Date:** {{RUN_DATE}}  
+**Brand:** {{BRAND_NAME}}
+
+---
+
 ## Research Objective
 
 Create a **complete messaging architecture and funnel content strategy** rooted in real audience psychology, competitive context, and persuasive narrative structure.  
@@ -137,6 +149,11 @@ Save the **full detailed research deliverable** into the outputs folder.
 - Complete references and contextual notes  
 
 Do **not** prune details — capture the **entire depth** of Prompt 4’s work.
+
+- Before saving, validate that the header contains:
+  - **Date:** {{RUN_DATE}}
+  - **Brand:** {{BRAND_NAME}}
+- If not, correct automatically.
 
 ---
 

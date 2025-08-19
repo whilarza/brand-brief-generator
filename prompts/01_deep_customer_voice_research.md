@@ -7,6 +7,18 @@ Combine results into structured, psychologically rich outputs as described.
 
 ---
 
+### Report Header Standard
+- Always use **RUN_DATE** and **BRAND_NAME** provided by the workflow.
+- If RUN_DATE is not explicitly passed, parse it from the output folder path `/outputs/{{YYYY-MM-DD}}_{{BRAND_NAME}}/`.
+- Never take the date or brand name from examples, sources, or defaults.
+
+The report header must always begin:
+
+**Date:** {{RUN_DATE}}  
+**Brand:** {{BRAND_NAME}}
+
+---
+
 ## Step 1: Brand Context (Centralized Sources)
 Read crawl/search seeds from **`brand_sources.md`** (do not prompt the user for URLs).  
 If any required section is empty in `brand_sources.md`, proceed with available sources and note missing items in the final Deliverables.
@@ -173,4 +185,12 @@ After completing Step 8, persist the **full research output** to the `/outputs/`
 
 ---
 
-✅ **Note:** Future prompts will also save their full outputs into the **same `/outputs/{{YYYY-MM-DD}}_{{BRAND_NAME}}/` folder**, following this standardized naming convention:
+✅ **Note:** 
+
+- Before saving, validate that the header contains:
+  - **Date:** {{RUN_DATE}}
+  - **Brand:** {{BRAND_NAME}}
+- If not, correct automatically.
+
+Future prompts will also save their full outputs into the **same `/outputs/{{YYYY-MM-DD}}_{{BRAND_NAME}}/` folder**, following this standardized naming convention:
+
