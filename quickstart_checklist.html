@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brand Brief Generator — Quickstart Checklist</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+            line-height: 1.6;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .section-icon {
+            font-size: 1.5em;
+        }
+        .checklist {
+            list-style: none;
+            padding: 0;
+        }
+        .checklist li {
+            margin: 8px 0;
+            padding: 8px 12px;
+            border-radius: 6px;
+            background: #f8f9fa;
+            border-left: 4px solid #dee2e6;
+            transition: all 0.2s ease;
+        }
+        .checklist li:hover {
+            background: #e9ecef;
+        }
+        .checklist li.checked {
+            background: #d4edda;
+            border-left-color: #28a745;
+            text-decoration: line-through;
+            color: #155724;
+        }
+        .checklist input[type="checkbox"] {
+            margin-right: 10px;
+            transform: scale(1.2);
+        }
+        .sub-checklist {
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+        .sub-checklist li {
+            font-size: 0.95em;
+            padding: 6px 10px;
+        }
+        .file-path {
+            font-family: 'Monaco', 'Menlo', monospace;
+            background: #f1f3f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 0.9em;
+        }
+        .note {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 6px;
+            padding: 12px;
+            margin: 15px 0;
+            font-size: 0.9em;
+        }
+        .warning {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            border-radius: 6px;
+            padding: 12px;
+            margin: 15px 0;
+            font-size: 0.9em;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: #e9ecef;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #28a745, #20c997);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        .progress-text {
+            text-align: center;
+            font-weight: bold;
+            color: #495057;
+            margin-top: 10px;
+        }
+        .save-btn {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            margin: 20px 0;
+        }
+        .save-btn:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Brand Brief Generator — Quickstart Checklist</h1>
+        
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <div class="progress-text" id="progressText">0% Complete</div>
+        
+        <button class="save-btn" onclick="saveProgress()">💾 Save Progress</button>
+
+        <h2><span class="section-icon">✅</span> Preflight</h2>
+        <ul class="checklist" id="preflight">
+            <li><input type="checkbox" onchange="updateProgress()"> Install <strong>Cursor Desktop</strong></li>
+            <li><input type="checkbox" onchange="updateProgress()"> In <strong>Cursor → Settings → MCP</strong>, confirm these are <strong>green</strong>:
+                <ul class="sub-checklist">
+                    <li><input type="checkbox" onchange="updateProgress()"> <code>firecrawl-mcp</code> (requires <code>FIRECRAWL_API_KEY</code>)</li>
+                    <li><input type="checkbox" onchange="updateProgress()"> <code>perplexity-mcp</code> (requires <code>PERPLEXITY_API_KEY</code>)</li>
+                    <li><input type="checkbox" onchange="updateProgress()"> <code>tavily-remote-mcp</code> (requires <code>TAVILY_API_KEY</code>)</li>
+                    <li><input type="checkbox" onchange="updateProgress()"> <code>apify</code> (optional; for social/marketplace scraping)</li>
+                </ul>
+            </li>
+        </ul>
+
+        <h2><span class="section-icon">🧭</span> Configure Sources</h2>
+        <ul class="checklist" id="configure">
+            <li><input type="checkbox" onchange="updateProgress()"> Open <span class="file-path">/docs/brand_sources.md</span> and fill in:
+                <ul class="sub-checklist">
+                    <li><input type="checkbox" onchange="updateProgress()"> Brand Name</li>
+                    <li><input type="checkbox" onchange="updateProgress()"> Geography</li>
+                    <li><input type="checkbox" onchange="updateProgress()"> Category</li>
+                    <li><input type="checkbox" onchange="updateProgress()"> Website</li>
+                    <li><input type="checkbox" onchange="updateProgress()"> Product Detail Pages (PDPs)</li>
+                    <li><input type="checkbox" onchange="updateProgress()"> About/Mission</li>
+                    <li><input type="checkbox" onchange="updateProgress()"> Blog/Education</li>
+                    <li><input type="checkbox" onchange="updateProgress()"> Socials</li>
+                    <li><input type="checkbox" onchange="updateProgress()"> Press/Owned Media</li>
+                    <li><input type="checkbox" onchange="updateProgress()"> Marketplaces</li>
+                    <li><input type="checkbox" onchange="updateProgress()"> Review Platforms</li>
+                    <li><input type="checkbox" onchange="updateProgress()"> Competitor Leads (optional)</li>
+                </ul>
+            </li>
+            <li><input type="checkbox" onchange="updateProgress()"> (Optional) Place CSV reviews file at:
+                <span class="file-path">/data/brand_reviews/{{BRAND_NAME}}_reviews.csv</span>
+            </li>
+        </ul>
+
+        <div class="note">
+            <strong>Required CSV headers (exactly):</strong><br>
+            <code>review_text, rating, source, author, product, date</code>
+        </div>
+
+        <h2><span class="section-icon">▶️</span> Run the Workflow</h2>
+        <ul class="checklist" id="workflow">
+            <li><input type="checkbox" onchange="updateProgress()"> Open: <span class="file-path">/docs/00_master_workflow.md</span></li>
+            <li><input type="checkbox" onchange="updateProgress()"> Run in Cursor: <code>/run 00_master_workflow.md</code></li>
+            <li><input type="checkbox" onchange="updateProgress()"> Confirm it creates: <span class="file-path">/outputs/{{YYYY-MM-DD}}_{{BRAND_NAME}}/</span></li>
+        </ul>
+
+        <h2><span class="section-icon">🔎</span> Review Outputs</h2>
+        <ul class="checklist" id="review">
+            <li><input type="checkbox" onchange="updateProgress()"> <strong>Quick summaries (≤2 pages each):</strong>
+                <span class="file-path">/docs/brand_context.md</span>
+            </li>
+            <li><input type="checkbox" onchange="updateProgress()"> <strong>Full detailed outputs (per prompt):</strong>
+                <span class="file-path">/outputs/{{YYYY-MM-DD}}_{{BRAND_NAME}}/</span>
+            </li>
+        </ul>
+
+        <div class="note">
+            <strong>Files generated:</strong><br>
+            • <code>01_deep_customer_voice_research_output.md</code><br>
+            • <code>02_competitive_landscape_output.md</code><br>
+            • <code>03_purchase_motivation_framework_output.md</code><br>
+            • <code>04_messaging_funnel_strategy_output.md</code>
+        </div>
+
+        <h2><span class="section-icon">🧩</span> Dependencies (Prompts Will Halt if Missing)</h2>
+        <ul class="checklist" id="dependencies">
+            <li><input type="checkbox" onchange="updateProgress()"> Prompt 2 requires: Prompt 1 full output <strong>+</strong> <code>brand_context.md</code></li>
+            <li><input type="checkbox" onchange="updateProgress()"> Prompt 3 requires: Prompt 1 & 2 full outputs <strong>+</strong> <code>brand_context.md</code></li>
+            <li><input type="checkbox" onchange="updateProgress()"> Prompt 4 requires: Prompt 1, 2 & 3 full outputs <strong>+</strong> <code>brand_context.md</code></li>
+        </ul>
+
+        <h2><span class="section-icon">🛠</span> Troubleshooting</h2>
+        <ul class="checklist" id="troubleshooting">
+            <li><input type="checkbox" onchange="updateProgress()"> <strong>MCP server is red</strong> → Check API keys and paths in Cursor → Settings → MCP</li>
+            <li><input type="checkbox" onchange="updateProgress()"> <strong>No outputs saved</strong> → Ensure <span class="file-path">/outputs/</span> exists and <code>Brand Name</code> is consistent in file names</li>
+            <li><input type="checkbox" onchange="updateProgress()"> <strong>CSV ignored</strong> → File must match <span class="file-path">/data/brand_reviews/{{BRAND_NAME}}_reviews.csv</span> and include exact headers</li>
+            <li><input type="checkbox" onchange="updateProgress()"> <strong>Outputs too thin</strong> → Confirm updated prompts include the <strong>Iteration Clause</strong> and that sources are complete</li>
+            <li><input type="checkbox" onchange="updateProgress()"> <strong>Infinite expansions</strong> → Add competitor leads or more sources; check CSV formatting</li>
+            <li><input type="checkbox" onchange="updateProgress()"> <strong>Summaries differ from full detail</strong> → This is expected. Summaries cap at ~2 pages; open full outputs in <span class="file-path">/outputs/</span> for complete detail.</li>
+        </ul>
+    </div>
+
+    <script>
+        // Load saved progress from localStorage
+        function loadProgress() {
+            const saved = localStorage.getItem('quickstartProgress');
+            if (saved) {
+                const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+                const savedStates = JSON.parse(saved);
+                checkboxes.forEach((checkbox, index) => {
+                    if (savedStates[index]) {
+                        checkbox.checked = true;
+                        checkbox.parentElement.classList.add('checked');
+                    }
+                });
+                updateProgress();
+            }
+        }
+
+        // Save progress to localStorage
+        function saveProgress() {
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            const states = Array.from(checkboxes).map(cb => cb.checked);
+            localStorage.setItem('quickstartProgress', JSON.stringify(states));
+            alert('Progress saved!');
+        }
+
+        // Update progress bar and text
+        function updateProgress() {
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            const checked = Array.from(checkboxes).filter(cb => cb.checked).length;
+            const total = checkboxes.length;
+            const percentage = Math.round((checked / total) * 100);
+            
+            document.getElementById('progressFill').style.width = percentage + '%';
+            document.getElementById('progressText').textContent = `${checked}/${total} items (${percentage}% Complete)`;
+            
+            // Update visual state
+            checkboxes.forEach(checkbox => {
+                if (checkbox.checked) {
+                    checkbox.parentElement.classList.add('checked');
+                } else {
+                    checkbox.parentElement.classList.remove('checked');
+                }
+            });
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            loadProgress();
+        });
+    </script>
+</body>
+</html>

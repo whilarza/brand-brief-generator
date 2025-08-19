@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brand Brief Generator — Usage Instructions</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+            line-height: 1.6;
+            color: #333;
+        }
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 4px solid #3498db;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+            font-size: 2.2em;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.5em;
+        }
+        .step-number {
+            background: #3498db;
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+        .section-icon {
+            font-size: 1.8em;
+        }
+        .prerequisites {
+            background: #e8f4fd;
+            border-left: 4px solid #3498db;
+            padding: 20px;
+            border-radius: 6px;
+            margin: 20px 0;
+        }
+        .important {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 6px;
+            padding: 15px;
+            margin: 20px 0;
+            font-weight: 500;
+        }
+        .warning {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            border-radius: 6px;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        .code-block {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 6px;
+            padding: 15px;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 0.9em;
+            margin: 15px 0;
+            overflow-x: auto;
+        }
+        .file-path {
+            font-family: 'Monaco', 'Menlo', monospace;
+            background: #f1f3f4;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.9em;
+            color: #d73a49;
+        }
+        .command {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 0.9em;
+            display: inline-block;
+            margin: 5px 0;
+        }
+        ul {
+            padding-left: 20px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        .checklist {
+            list-style: none;
+            padding: 0;
+        }
+        .checklist li {
+            margin: 10px 0;
+            padding: 10px 15px;
+            border-radius: 6px;
+            background: #f8f9fa;
+            border-left: 4px solid #dee2e6;
+            transition: all 0.2s ease;
+        }
+        .checklist li:hover {
+            background: #e9ecef;
+        }
+        .checklist input[type="checkbox"] {
+            margin-right: 10px;
+            transform: scale(1.2);
+        }
+        .sub-checklist {
+            margin-left: 25px;
+            margin-top: 10px;
+        }
+        .sub-checklist li {
+            font-size: 0.95em;
+            padding: 6px 10px;
+        }
+        .toc {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .toc h3 {
+            margin-top: 0;
+            color: #495057;
+        }
+        .toc ul {
+            list-style: none;
+            padding: 0;
+        }
+        .toc li {
+            margin: 5px 0;
+        }
+        .toc a {
+            color: #007bff;
+            text-decoration: none;
+            padding: 5px 0;
+            display: block;
+        }
+        .toc a:hover {
+            text-decoration: underline;
+        }
+        .highlight {
+            background: #fff3cd;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Brand Brief Generator — Usage Instructions</h1>
+        
+        <div class="toc">
+            <h3>📋 Table of Contents</h3>
+            <ul>
+                <li><a href="#prerequisites">0) Prerequisites</a></li>
+                <li><a href="#add-sources">1) Add Brand Sources</a></li>
+                <li><a href="#add-reviews">2) Add Customer Reviews (Optional)</a></li>
+                <li><a href="#run-workflow">3) Run the Workflow</a></li>
+                <li><a href="#read-results">4) Read Results</a></li>
+                <li><a href="#run-another">5) Run for Another Brand</a></li>
+                <li><a href="#troubleshooting">6) Troubleshooting</a></li>
+                <li><a href="#notes">7) Notes</a></li>
+            </ul>
+        </div>
+
+        <h2 id="prerequisites"><span class="step-number">0</span> Prerequisites</h2>
+        <div class="prerequisites">
+            <ul>
+                <li>Install <strong>Cursor Desktop</strong>.</li>
+                <li>In <strong>Cursor → Settings → Model Context Protocol (MCP)</strong>, ensure these servers are <strong>green</strong> (API keys required):
+                    <ul>
+                        <li><strong>firecrawl-mcp</strong> — scrapes brand sites (home, PDPs, FAQs, blog).<br>
+                            Required: <code>FIRECRAWL_API_KEY</code></li>
+                        <li><strong>perplexity-mcp</strong> — synthesizes/expands insights from forums, Reddit, Quora, open web.<br>
+                            Required: <code>PERPLEXITY_API_KEY</code></li>
+                        <li><strong>tavily-remote-mcp</strong> — targeted web queries for competitor/discovery support.<br>
+                            Required: <code>TAVILY_API_KEY</code></li>
+                        <li><strong>apify (optional)</strong> — marketplace/review/social scraping (Amazon, Trustpilot, YouTube, TikTok, IG).<br>
+                            Use only for review/social-heavy categories.</li>
+                    </ul>
+                </li>
+
+            </ul>
+        </div>
+
+        <h2 id="add-sources"><span class="step-number">1</span> Add Brand Sources (the seeds)</h2>
+        <p>Open: <span class="file-path">/docs/brand_sources.md</span></p>
+        <p>Fill every structured field:</p>
+        <ul>
+            <li>Brand Name</li>
+            <li>Geography</li>
+            <li>Category</li>
+            <li>Website</li>
+            <li>Product Detail Pages (PDPs)</li>
+            <li>About/Mission</li>
+            <li>Blog/Education</li>
+            <li>Socials</li>
+            <li>Press/Owned Media</li>
+            <li>Marketplaces</li>
+            <li>Review Platforms</li>
+            <li>Competitor Leads (optional)</li>
+        </ul>
+        <div class="important">
+            <strong>Important:</strong> The <strong>Brand Name</strong> value is used as <code>{{BRAND_NAME}}</code> across the workflow. Keep it consistent and free of extra spaces.
+        </div>
+
+        <h2 id="add-reviews"><span class="step-number">2</span> Add Customer Reviews (Optional)</h2>
+        <p>If you have reviews, save a CSV here:</p>
+        <div class="code-block">/data/brand_reviews/{{BRAND_NAME}}_reviews.csv</div>
+        <p><strong>Required headers (exactly):</strong></p>
+        <div class="code-block">review_text, rating, source, author, product, date</div>
+        <p><strong>Rules:</strong></p>
+        <ul>
+            <li>If present, the CSV is treated as the <strong>primary Voice of Customer</strong> dataset and is tagged <span class="highlight">[Customer Reviews CSV]</span>.</li>
+            <li>If missing, the system falls back to MCP crawling/discovery; web-sourced insights are tagged <span class="highlight">[External Web Sources]</span>.</li>
+        </ul>
+
+
+
+        <h2 id="run-workflow"><span class="step-number">3</span> Run the Workflow</h2>
+        <p>Open: <span class="file-path">/docs/00_master_workflow.md</span></p>
+        <p>Then run in Cursor:</p>
+        <div class="command">/run 00_master_workflow.md</div>
+        <p>The workflow will:</p>
+        <ol>
+            <li>Check for <span class="file-path">/data/brand_reviews/{{BRAND_NAME}}_reviews.csv</span> (optional).</li>
+            <li>Execute <strong>Prompts 01 → 04</strong> in sequence.</li>
+            <li>Save full, detailed outputs to:<br>
+                <span class="file-path">/outputs/{{YYYY-MM-DD}}_{{BRAND_NAME}}/</span></li>
+            <li>Append concise summaries (≤2 pages per prompt) to:<br>
+                <span class="file-path">/docs/brand_context.md</span></li>
+        </ol>
+        <div class="warning">
+            <strong>Mandatory input rule (prompts will halt if unmet):</strong>
+            <ul>
+                <li><strong>Prompt 2</strong> requires Prompt 1 full output <strong>and</strong> <code>brand_context.md</code>.</li>
+                <li><strong>Prompt 3</strong> requires Prompt 1 & 2 full outputs <strong>and</strong> <code>brand_context.md</code>.</li>
+                <li><strong>Prompt 4</strong> requires Prompt 1, 2 & 3 full outputs <strong>and</strong> <code>brand_context.md</code>.</li>
+            </ul>
+        </div>
+
+        <h2 id="read-results"><span class="step-number">4</span> Read Results</h2>
+        <p><strong>Quick overview (summaries):</strong><br>
+        <span class="file-path">/docs/brand_context.md</span></p>
+        <ul>
+            <li>Each prompt appends a <strong>dated</strong> summary section (≤2 pages).</li>
+            <li>Summaries are <strong>appended</strong>—never overwritten.</li>
+        </ul>
+        <p><strong>Full detailed outputs (by prompt):</strong><br>
+        <span class="file-path">/outputs/{{YYYY-MM-DD}}_{{BRAND_NAME}}/</span></p>
+        <p>Files created:</p>
+        <ul>
+            <li><code>01_deep_customer_voice_research_output.md</code></li>
+            <li><code>02_competitive_landscape_output.md</code></li>
+            <li><code>03_purchase_motivation_framework_output.md</code></li>
+            <li><code>04_messaging_funnel_strategy_output.md</code></li>
+        </ul>
+
+        <h2 id="run-another"><span class="step-number">5</span> Run for Another Brand</h2>
+        <ol>
+            <li>Update <span class="file-path">/docs/brand_sources.md</span> with the new brand.</li>
+            <li>(Optional) Add <span class="file-path">/data/brand_reviews/{{BRAND_NAME}}_reviews.csv</span>.</li>
+            <li>Re-run: <div class="command">/run 00_master_workflow.md</div></li>
+        </ol>
+        <p>A new dated folder is created automatically under <span class="file-path">/outputs/</span>.</p>
+
+        <h2 id="troubleshooting"><span class="step-number">6</span> Troubleshooting</h2>
+        <ul>
+            <li><strong>MCP server is red</strong> → Check API keys and server paths in Cursor <strong>Settings → MCP</strong>.</li>
+            <li><strong>No outputs saved</strong> → Confirm <span class="file-path">/outputs</span> exists and <code>Brand Name</code> in <code>brand_sources.md</code> matches your file names (no trailing spaces).</li>
+            <li><strong>CSV ignored</strong> → File name must be exactly <span class="file-path">/data/brand_reviews/{{BRAND_NAME}}_reviews.csv</span> and include the required headers.</li>
+            <li><strong>Prompt halts</strong> → One or more required inputs (prior full outputs or <code>brand_context.md</code>) are missing. Generate them, then re-run.</li>
+            <li><strong>Summaries look thin</strong> → Summaries are capped at ~2 pages by design. Open the full prompt outputs in <span class="file-path">/outputs/</span> for complete detail.</li>
+            <li><strong>Runs feel short/generic</strong> → Ensure you're using the updated prompts that include the <strong>Iteration Clause</strong>; verify MCP servers are green and <code>brand_sources.md</code> is fully populated.</li>
+            <li><strong>Runs loop/expand repeatedly</strong> → The <strong>Iteration Clause</strong> is self-expanding. Check for sparse sources, missing competitor seeds, or malformed CSV headers causing limited evidence.</li>
+        </ul>
+
+        <h2 id="notes"><span class="step-number">7</span> Notes</h2>
+        <ul>
+            <li>Prompts <strong>2–4</strong> require the <strong>full detailed outputs</strong> of earlier prompts <strong>plus</strong> <code>brand_context.md</code>.</li>
+            <li>Each prompt appends a new dated summary to <code>brand_context.md</code> (<strong>never overwrite</strong>).</li>
+            <li><strong>Iteration Clause</strong> is included across prompts to self-expand until outputs are <strong>comprehensive and evidence-backed</strong>.</li>
+            <li><strong>apify</strong> is optional and used only for <strong>review/social-heavy</strong> categories.</li>
+            <li>All deliverables follow the <code>01–04</code> file naming convention in <span class="file-path">/outputs/{{YYYY-MM-DD}}_{{BRAND_NAME}}/</span>.</li>
+        </ul>
+
+
+    </div>
+</body>
+</html>
