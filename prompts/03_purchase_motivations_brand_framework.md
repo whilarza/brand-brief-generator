@@ -4,110 +4,117 @@
 
 **Required references before proceeding:**
 
-- Full **Prompt 1 output**:  
-/outputs/{{YYYY-MM-DD}}_{{BRAND_NAME}}/01_deep_customer_voice_research_output.md
+- **Prompt 1 full output:**  
+  `/outputs/{{YYYY-MM-DD}}_{{BRAND_NAME}}/01_deep_customer_voice_research_output.md`
 
-- Full **Prompt 2 output**:  
-/outputs/{{YYYY-MM-DD}}_{{BRAND_NAME}}/02_competitive_landscape_output.md
+- **Prompt 2 full output:**  
+  `/outputs/{{YYYY-MM-DD}}_{{BRAND_NAME}}/02_competitive_landscape_output.md`
 
-- Consolidated **summary context**:  
-/docs/brand_context.md
+- **Consolidated summary context:**  
+  `/docs/brand_context.md`
 
-**Usage rule:**
-- Use `brand_context.md` only as a **summary lens**.  
-- Use the **full outputs of Prompts 1 + 2** for depth and detail.  
+**Critical Usage Rule:**  
+- Do **not** proceed unless BOTH full outputs of Prompts 1 and 2 are available.  
+- Use `brand_context.md` only as a **summary lens**, never as a substitute for Prompts 1 and 2.  
 - If any inputs are missing, stop and request clarifications.
-
----
-
-### Report Header Standard
-- Always use **RUN_DATE** and **BRAND_NAME** provided by the workflow.
-- If RUN_DATE is not explicitly passed, parse it from the output folder path `/outputs/{{YYYY-MM-DD}}_{{BRAND_NAME}}/`.
-- Never take the date or brand name from examples, sources, or defaults.
-
-The report header must always begin:
-
-**Date:** {{RUN_DATE}}  
-**Brand:** {{BRAND_NAME}}
 
 ---
 
 ## Research Objective
 
-Translate psychological, emotional, and competitive data into a **usable brand framework**.  
-Define the emotional logic behind purchasing, uncover resistance points, and structure messaging that meets buyers with empathy and authority.
+Translate customer psychology (Prompt 1) and competitive landscape (Prompt 2) into a **usable brand framework**.  
+Define emotional + logical purchase drivers, identify resistance points, and shape messaging that meets buyers with empathy, proof, and authority.
 
 ---
 
 ## Steps
 
 ### Step 1 — Motivation Map
-For each segment (**Strangers, Audience Members, Customers**):
-- Emotional motivators (fear, relief, pride, guilt, hope)  
-- Logical motivators (ingredients, guarantees, ease-of-use, data)  
-- Transformation Promise: outcome they believe they’re buying  
-- Crisis/Catalyst: tipping moments from consideration → action  
+For each segment (**Strangers, Audience Members, Customers**), provide at least **5–7 motivators**:
 
-Ground all motivators in **customer language** from Prompt 1.
+- **Emotional motivators** (fear, relief, pride, guilt, hope)  
+- **Logical motivators** (ingredients, guarantees, ease-of-use, social proof)  
+- **Transformation Promise:** what outcome they *believe* they are buying  
+- **Crisis/Catalyst:** tipping moments that move them from consideration → action  
+
+**Requirements:**  
+- Ground motivators in **verbatim or near-verbatim language** from Prompt 1 (VoC).  
+- Cross-reference competitor themes from Prompt 2.  
+- Mark source attribution: `[Prompt 1]`, `[Prompt 2]`, `[CSV Reviews]`, `[External]`.  
+- If a motivator feels generic, run an additional Perplexity query and expand before moving on.  
 
 ---
 
 ### Step 2 — Objection Matrix
-Identify 5–7 dominant objections. For each:  
-- Statement in their own words (or close paraphrase)  
-- Emotional root (fear of being duped, overwhelm, shame, etc.)  
-- Logical surface reason (cost, complexity, trust, risk)  
-- Strategic response (copy approach, proof element, education, offer)  
+Identify at least **5–7 dominant objections**. Present in **table format** with columns:
 
-Be empathetic and practical — these are to be **used in live copy**.
+| Objection (Customer’s words) | Emotional Root | Logical Surface Reason | Strategic Response (copy/proof/offer) | Source |
+
+**Rules:**  
+- Emotional root must tie to VoC data (fear of being duped, overwhelm, shame, etc.).  
+- Strategic responses must be practical and **ready for copywriting use** (not abstract).  
+- Cite source `[Prompt 1]`, `[Prompt 2]`, `[CSV Reviews]`, `[External]`.  
+- Thin/vague objections must be re-expanded before finalization.  
 
 ---
 
 ### Step 3 — Brand Audience Framework
 Answer with precision and emotional clarity:
+
 - **WHO** – who is this for? (specific context, not generic)  
-- **IDENTITY** – what labels/roles do customers assign themselves?  
-- **SECRET WISH** – the unspoken outcome they desire most  
+- **IDENTITY** – labels/roles customers assign themselves  
+- **SECRET WISH** – the unspoken desire they want fulfilled  
 - **RELATIONSHIP** – how should they feel about {{BRAND_NAME}}? (guide, friend, protector, expert, rebel, etc.)  
-- **POINT OF DIFFERENCE** – unique belief/stance that sets the brand apart  
+- **POINT OF DIFFERENCE** – unique stance that sets the brand apart  
 - **VOICE** – 5 traits (e.g., warm, precise, empowering, irreverent)  
-- **PROBLEM** – core emotional/practical problem solved  
+- **PROBLEM** – core emotional + practical problem solved  
 - **AWARENESS** – life moment that surfaces the problem  
 - **TRANSFORMATION** – change they will feel after success with {{BRAND_NAME}}  
+
+**Requirements:**  
+- Each field must reference both **customer language (Prompt 1)** and **competitor positioning (Prompt 2)**.  
+- If any field feels thin, expand with additional Perplexity synthesis.  
 
 ---
 
 ### Step 4 — Funnel Mindset Map
-Map beliefs, fears, and trust triggers at each stage:
+Map beliefs, fears, and trust triggers at each stage. Provide **3–5 insights per stage**:
 
 **Top of Funnel (Strangers):**  
-- What they believe/misunderstand  
-- What they fear/avoid  
+- Beliefs/misunderstandings  
+- Fears/avoidances  
 - What they’re open to hearing  
 
 **Middle of Funnel (Audience Members):**  
-- What they wrestle with  
-- Questions they ask  
-- What builds/breaks trust  
+- Internal wrestling/conflicts  
+- Key questions they ask  
+- What builds trust / what breaks trust  
 
-**Bottom of Funnel (Customers/Post-Purchase):**  
+**Bottom of Funnel (Customers & Post-Purchase):**  
 - What they hope will happen  
 - Lingering doubts  
-- Messages that turn them into advocates  
+- Messages that convert them into advocates  
+
+**Requirements:**  
+- Tie each stage back to motivators/objections already mapped.  
+- Must include specific **phrases or paraphrases from Prompt 1 + Prompt 2**.  
 
 ---
 
 ### Step 5 — Brand Tone Risk Map
-List 3–5 tonal red flags to avoid.  
-Each should connect to an emotional driver or objection (e.g., if shame → avoid preachy tone).
+List **3–5 tonal red flags to avoid**.  
+
+Each red flag must:  
+- Be directly tied to an objection or emotional driver (e.g., if fear = shame, avoid “preachy” tone).  
+- Include why it creates risk and how to avoid it.  
 
 ---
 
 ### Step 6 — Summarization → `brand_context.md` (Append/Update)
-After completing deliverables, **append** a concise section to `brand_context.md`:
+After completing all steps, **append** a concise section to `/docs/brand_context.md`:
 
 **Title:**  
-[Prompt 3] Motivation, Objections & Framework — YYYY-MM-DD
+[Prompt 3] Motivation, Objections & Framework — {{YYYY-MM-DD}}
 
 **Include:**  
 - 5–7 core motivators (emotional + logical)  
@@ -117,49 +124,54 @@ After completing deliverables, **append** a concise section to `brand_context.md
 - 2–3 Tone red flags  
 
 **Rules:**  
-- Keep summary ≤ 2 pages.  
-- Do not overwrite; always append a new dated section.  
+- Summary must be ≤ 2 pages.  
+- Do not overwrite past context — always append with date.  
 
 ---
 
 ### Step 7 — Persist Outputs
-Save the **full detailed research deliverable** into the outputs folder.
+Save the **full detailed research deliverable** into:
 
-**Path:**  
-/outputs/{{YYYY-MM-DD}}_{{BRAND_NAME}}/03_purchase_motivation_framework_output.md
+`/outputs/{{YYYY-MM-DD}}_{{BRAND_NAME}}/03_purchase_motivation_framework_output.md`
 
-**File must include:**  
+File must include:  
 - Full Motivation Map  
 - Objection Matrix  
 - Brand Audience Framework  
 - Funnel Mindset Map  
 - Tone Risk Map  
-- Complete references and contextual notes  
+- Complete references + contextual notes  
 
-Do **not** prune down details in this file — it should capture the **entire depth** of Prompt 3’s work.
-
-- Before saving, validate that the header contains:
-  - **Date:** {{RUN_DATE}}
-  - **Brand:** {{BRAND_NAME}}
-- If not, correct automatically.
+**Important:** Do **not** prune details. This file must capture the full depth.  
 
 ---
 
 ## MCPs
 - **Firecrawl** → scrape brand site (science, testimonials, FAQs)  
-- **Perplexity** → synthesize objections, triggers, catalysts from forums, Reddit, Quora, industry discussions  
-- **Apify (Optional)** → pull marketplace/review/social feeds when product/category is **review-heavy** (e.g., Amazon, Trustpilot, Judge.me, YouTube comments)  
+- **Perplexity** → expand motivators, objections, catalysts from forums, Reddit, Quora, industry discussions  
+- **Apify (optional)** → scrape marketplaces/review/social feeds (Amazon, Trustpilot, Judge.me, YouTube, TikTok, etc.) when category is **review/social heavy**  
 
-> **Rule of Thumb:** Use Apify only if the category is **marketplace/review/social heavy**. Otherwise, rely on Firecrawl + Perplexity for faster, cheaper runs.  
+> **Rule of Thumb:** Use Apify only if product category is marketplace/review/social heavy. Otherwise, rely on Firecrawl + Perplexity for speed + cost.  
+
+---
+
+### Iteration Clause (Critical)
+After completing each step:  
+
+1. **Review depth**: If any section has fewer than the required details (sentences, examples, proof points), expand automatically.  
+2. **Cross-check**: Ensure every step cites inputs from **all required prior prompts**. If not, revise.  
+3. **Loop**: Continue refining and expanding until all sections are comprehensive, clear, and evidence-backed.  
+4. **No premature finalization**: Do not move forward to summarization or save outputs until quality standards are met.  
+
 
 ---
 
 ## Deliverables
-1. Purchase Motivation Map (per segment)  
-2. Objection Matrix (5–7 prioritized objections)  
-3. Brand Audience Framework (WHO, Identity, Wish, Relationship, etc.)  
-4. Funnel Mindset Map (Top/Mid/Bottom of funnel)  
-5. Brand Tone Risk Map  
+1. Motivation Map (≥5–7 motivators per segment)  
+2. Objection Matrix (≥5–7 objections, tabular format)  
+3. Brand Audience Framework  
+4. Funnel Mindset Map (≥3–5 insights per funnel stage)  
+5. Tone Risk Map (≥3 red flags)  
 6. Summarization appended to `brand_context.md`  
-7. Full detailed output file saved to:  
-/outputs/{{YYYY-MM-DD}}_{{BRAND_NAME}}/03_purchase_motivation_framework_output.md
+7. Full detailed output saved to:  
+   `/outputs/{{YYYY-MM-DD}}_{{BRAND_NAME}}/03_purchase_motivation_framework_output.md`

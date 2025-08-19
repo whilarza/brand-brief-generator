@@ -2,161 +2,146 @@
 
 ## Instruction for Cursor
 This workflow uses **Firecrawl**, **Tavily**, and **Perplexity** MCP servers.  
-When asked to crawl or search, route those requests through the MCPs instead of default search.  
-Combine results into structured, psychologically rich outputs as described.
+Always route crawling and searching through MCPs.  
+Your role: act as a **market research strategist + voice-of-customer analyst**, not just a summarizer.  
 
 ---
 
-### Report Header Standard
-- Always use **RUN_DATE** and **BRAND_NAME** provided by the workflow.
-- If RUN_DATE is not explicitly passed, parse it from the output folder path `/outputs/{{YYYY-MM-DD}}_{{BRAND_NAME}}/`.
-- Never take the date or brand name from examples, sources, or defaults.
-
-The report header must always begin:
-
-**Date:** {{RUN_DATE}}  
-**Brand:** {{BRAND_NAME}}
-
----
-
-## Step 1: Brand Context (Centralized Sources)
-Read crawl/search seeds from **`brand_sources.md`** (do not prompt the user for URLs).  
-If any required section is empty in `brand_sources.md`, proceed with available sources and note missing items in the final Deliverables.
+## Step 1: Brand Context (Canonical Sources)
+- Pull crawl/search seeds from **`brand_sources.md`**.  
+- Use them as the starting dataset; **do not ask the user for URLs**.  
+- If any sources are missing, still continue and explicitly flag them in the final report.  
 
 ---
 
 ## Step 2: Research Objective
-Conduct in-depth customer research to build emotionally grounded, segment-specific **Ideal Customer Personas (ICPs)** for **[Brand Name]**.
+Produce a **comprehensive, emotionally detailed portrait of the customer landscape** for **[Brand Name]**.  
 
-**Focus**
-- Uncover real customer fears, motivations, metaphors, identity conflicts, and moment-of-need triggers.  
-- Use only publicly available language and sentiment data.  
-- Deliver detail suitable for brand strategy and messaging development.
+**Goals:**
+- Reveal **core psychological drivers** behind why people do or don’t buy.  
+- Capture **authentic voice-of-customer (VoC)** across brand-owned, category-wide, and review data.  
+- Build **3 complete Ideal Customer Personas (ICPs)** with *layered emotions, identity conflicts, and moment-of-need triggers*.  
+- Provide a **marketing-usable dataset** (quotes, metaphors, unmet needs, tensions).  
 
 ---
 
 ## Step 3: Audience Segments
-Build one distinct ICP for each:
-1. **Strangers** — not yet aware of brand/problem  
-2. **Audience Members** — aware but not purchased  
-3. **Customers** — already purchased/engaged
+Develop 3 distinct ICPs:  
+1. **Strangers** — unaware of brand/problem.  
+2. **Audience Members** — aware of brand/problem but not yet purchased.  
+3. **Customers** — existing/past buyers.  
 
 ---
 
-## Step 4: Data Gathering (MCP Integration + CSV Review File)
+## Step 4: Data Gathering (MCP + CSV)
+- **Firecrawl** → Crawl brand-owned assets (site, product, mission, blog). Extract claims, emotional framing, tone.  
+- **Tavily** → Search external coverage (press, blogs, Quora, parenting forums, reviews outside owned sites). Extract broad cultural/category sentiment.  
+- **Perplexity** → Gather user-generated chatter (Reddit, TikTok, Instagram, Amazon reviews). Highlight figurative/identity-driven language.  
 
-Use MCP servers as follows (derive targets from `brand_sources.md`):
-
-- **Firecrawl** → Crawl product pages, blog posts, brand mission, about page. Extract messaging, claims, emotional framing.  
-- **Tavily** → Surface broader web sentiment: forums, Quora, press, blogs, third-party discussions. Map category context.  
-- **Perplexity** → Mine user-generated content (e.g., Reddit, Amazon, TikTok, Instagram). Group by theme; prioritize high-emotion language.  
-
-**If a CSV file exists at `/data/brand_reviews/{{BRAND_NAME}}_reviews.csv`:**
-- Parse the CSV for **review text, rating, author, and source columns**.  
+**If CSV file at `/data/brand_reviews/{{BRAND_NAME}}_reviews.csv`:**
+- Parse review text + rating + author + source.  
 - Treat this as the **primary Voice of Customer dataset**.  
-- Rank recurring phrases, emotional expressions, and metaphors by **frequency + emotional intensity**.  
-- Label them as **[Customer Reviews CSV]** in the final Sources list.  
+- Rank recurring phrases by **frequency × emotional intensity**.  
+- Mark them as **[Customer Reviews CSV]** in outputs.  
 
 ---
 
 ## Step 5: Persona Construction Requirements
-For each ICP, document:
+For each ICP, provide:
 
-### Demographics & Identity Markers
+### Demographics & Identity
 - Age, gender, income, household  
-- Role in decision-making  
-- Labels/self-descriptions, lifestyle, values
+- Parenting/decision-making roles  
+- Values, lifestyle, identity labels  
 
-### Emotional & Psychological Drivers
-- Persistent worries, frustrations  
-- Core fears, guilt, shame  
-- Aspirations, desired transformations  
-- Identity conflicts (e.g., “I want X, but feel Y”)  
-- Emotional consequences of inaction
+### Emotional Drivers
+- Persistent frustrations, unmet needs  
+- Core fears, guilt, shame, anxieties  
+- Deep aspirations, desired transformations  
+- Identity conflicts (e.g., *“I want to be a creative parent, but I fear the mess/cost”*)  
+- Emotional cost of inaction  
 
-### Awareness & Trigger Moments
-- Situational, seasonal, emotional triggers  
-- Language used when realizing the problem  
-- Behavioral signals they’re ready to act
+### Awareness & Triggers
+- Seasonal, situational, emotional triggers  
+- Phrases/language used when problem crystallizes  
+- Behavioral signals that show readiness to act  
 
-### Voice of Customer (VoC) Insights
-- Extract **10–15 most repeated phrases**  
-- Rank by **frequency + emotional intensity**  
-- Include **direct quotes** or close paraphrases with sources  
-- Group by theme (confusion, urgency, optimism, disappointment)  
-- Highlight **metaphors, figurative language, identity conflicts**  
-- Distinguish **pre-purchase vs post-purchase**  
-- Clearly separate insights into:
+### Voice of Customer Insights
+- Extract **20–30 recurring phrases or quotes** across CSV + web.  
+- Rank by **frequency + emotional intensity**.  
+- Group into **themes** (hope, confusion, guilt, pride, urgency, delight).  
+- Highlight **metaphors & figurative language** (e.g., *“a lifesaver,” “our living room turned into a spaceship”*).  
+- Explicitly separate:  
   - [Customer Reviews CSV]  
   - [External Web Sources]  
 
 ---
 
-## Step 6: Final Deliverables
-- Three ICP Profiles (Strangers, Audience, Customers)  
-- Top 15 VoC Phrases (Ranked + Themed)  
-- Emotional Theme Summary → fears, motivators, unmet needs  
-- Metaphors & Identity Conflicts → explicitly called out  
-- Emergent Trends/Tensions → strategic implications  
-- **Missing Sources Note** (if any sections in `brand_sources.md` were empty)  
+## Step 6: Synthesis Requirements
+- **Compare segments** (what Strangers fear vs what Customers celebrate).  
+- **Highlight contradictions** (e.g., “too expensive” vs “worth every penny”).  
+- **Identify unmet needs** (requests, complaints, gaps).  
+- **Strategic implications** — what messaging hooks, features, or campaigns flow directly from these tensions.  
 
 ---
 
-## Step 7: Guidelines
-- Use only **publicly available, sourced customer language**  
-- Do **not fabricate** quotes; paraphrase only recurring patterns  
-- Be explicit about **emotional tone + trigger context**  
-- Keep structure **clean, exportable, and ready for downstream strategy**
+### Step 7: Iteration Clause (Critical)
+After completing each step:  
+
+1. **Review depth**: If any section has fewer than the required details (sentences, examples, proof points), expand automatically.  
+2. **Cross-check**: Ensure every step cites inputs from **all required prior prompts**. If not, revise.  
+3. **Loop**: Continue refining and expanding until all sections are comprehensive, clear, and evidence-backed.  
+4. **No premature finalization**: Do not move forward to summarization or save outputs until quality standards are met.  
 
 ---
 
-## Step 8: Summarization → `brand_context.md` (Append/Update)
-After completing all deliverables, **append** a concise summary to `brand_context.md` under a new dated section.
+## Step 8: Deliverables
+1. **Three Full ICP Profiles** (Strangers, Audience, Customers).  
+2. **Top 20–30 VoC Phrases** (ranked + themed, with source tags).  
+3. **Emotional Theme Map** — fears, motivators, unmet needs.  
+4. **Metaphors & Identity Conflicts** — explicit bullet list.  
+5. **Emergent Tensions & Strategic Implications**.  
+6. **Missing Source Note** (if any gaps in brand_sources.md).  
 
-- Keep the appended block **≤ 1–2 pages**  
-- If the draft exceeds 2 pages, **truncate to the most representative insights**  
-- Do **not** overwrite previous sections; always append a new dated section  
+---
 
-### Format to Append
+## Step 9: Append to `brand_context.md`
+After full report is done, create a **concise ≤2 page summary** and append to `brand_context.md`.  
+
+### Format:
 ```markdown
 [Prompt 1] Customer & Voice Summary — YYYY-MM-DD
 
-Brand Overview: <1–3 lines: product, promise, positioning>
+Brand Overview: <1–3 lines>
 
-Audience Segments (Shortform):
-Strangers: <one-sentence description>  
-Audience Members: <one-sentence description>  
-Customers: <one-sentence description>  
+Audience Snapshots:
+Strangers: <1 sentence>  
+Audience Members: <1 sentence>  
+Customers: <1 sentence>  
 
 Key Emotional Drivers:
 - Motivator 1
 - Motivator 2
-- Motivator 3
 - Fear 1
 - Fear 2
-- Fear 3
 
-Top 5 VoC Phrases (most representative):
-"<phrase>" — [Customer Reviews CSV]  
+Top 5 VoC Phrases:
 "<phrase>" — [Customer Reviews CSV]  
 "<phrase>" — [External Web Sources]  
-"<phrase>" — [External Web Sources]  
-"<phrase>" — [External Web Sources]  
 
-Metaphors / Identity Conflicts (notable):
-- <bullet point>
-- <bullet point>
+Metaphors / Conflicts:
+- <bullet point>  
 
 Strategic Watchouts:
-- <emergent risks/tensions that affect messaging>
+- <bullet point>  
 
 Sources Used:
-- [Customer Reviews CSV]  
-- [brand_sources.md seeds]  
+- [CSV reviews]  
+- [brand_sources.md]  
 - [External Web Sources]
 
 
-## Step 9: Persist Outputs
+## Step 10: Persist Outputs
 After completing Step 8, persist the **full research output** to the `/outputs/` directory.
 
 ### Instructions
@@ -185,12 +170,10 @@ After completing Step 8, persist the **full research output** to the `/outputs/`
 
 ---
 
-✅ **Note:** 
-
+✅ **Note:**  
 - Before saving, validate that the header contains:
-  - **Date:** {{RUN_DATE}}
-  - **Brand:** {{BRAND_NAME}}
-- If not, correct automatically.
+  - **Date:** {{RUN_DATE}}  
+  - **Brand:** {{BRAND_NAME}}  
+- If not, correct automatically.  
 
-Future prompts will also save their full outputs into the **same `/outputs/{{YYYY-MM-DD}}_{{BRAND_NAME}}/` folder**, following this standardized naming convention:
-
+Future prompts will also save their full outputs into the **same `/outputs/{{YYYY-MM-DD}}_{{BRAND_NAME}}/` folder**, following this standardized naming convention.
