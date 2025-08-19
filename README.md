@@ -72,8 +72,8 @@ Each step builds on previous outputs, ensuring comprehensive and coherent result
 
 ---
 
-**Ready to generate your first brand brief?**Download the brand brief generator repo today!
+Ready to generate your first brand brief? Download the brand brief generator repo today!
 
 ---
 
-*Built with ❤️ for marketing teams who want to move faster and smarter.*
+Built with ❤️ for marketing teams who want to move faster and smarter.
