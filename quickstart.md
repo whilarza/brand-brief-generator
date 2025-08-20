@@ -41,12 +41,18 @@ review_text, rating, source, author, product, date
 ## ▶️ Run the Workflow
 
 - [ ] Open:
-/docs/00_master_workflow.md
+/prompts/00_master_workflow.md
 
 - [ ] In Cursor, **select model**:  
-  - Default: **GPT-5** (recommended for depth + balance)  
+  - **Prompts 1 & 2:** Use **GPT-5** (depth + quality)  
+  - **Prompts 3 & 4:** Use **GPT-5** or **GPT-5-fast** (faster, still high quality)  
   - Use **Auto** if unsure (Cursor will optimize model for reliability/cost)  
   - Use **Max Mode** only if your context window is >200k tokens (e.g. huge datasets)
+
+- [ ] **Tool Optimization:**
+  - Keep tools lean: enable only servers you'll actually use for that brand
+  - **Browserbase:** Enable only when Firecrawl/Apify fail or page is JS heavy
+  - **DataForSEO:** Whitelist just SERP/keywords/competitors endpoints
 
 - [ ] Run in Cursor:
 /run 00_master_workflow.md

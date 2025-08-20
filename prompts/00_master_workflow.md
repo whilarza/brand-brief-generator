@@ -68,6 +68,57 @@ Because model availability and performance changes over time, this workflow does
 - **Use Auto** if unsure — ensures Cursor optimizes for reliability and cost.  
 - **Use Max Mode** only when the context window limit is a hard blocker.  
 
+### Practical Model & Tool Tips
+- **Model Selection by Prompt:**
+  - **Prompts 1 & 2:** Use GPT-5 for depth and quality
+  - **Prompts 3 & 4:** Use GPT-5 or GPT-5-fast (faster, still high quality)
+- **Tool Optimization:**
+  - Keep tools lean: enable only the servers you'll actually use for that brand
+  - **Browserbase:** Enable only when Firecrawl/Apify fail or the page is JS heavy; pass specific URLs, not domains
+  - **DataForSEO (dfs):** Whitelist just SERP/keywords/competitors endpoints; leave the rest disabled
+
+---
+
+## Research Orchestrator (Global)
+
+**Goal:** emulate Deep Research with a repeatable loop: *Fan-out → Retrieve → Quality-gate → Enrich → Synthesize → Evaluate → Iterate.*
+
+### Depth Controls (tunable)
+- MIN_CITATIONS: 15           <!-- total unique domains across a prompt -->
+- MIN_DIRECT_QUOTES: 18       <!-- verbatim or lightly paraphrased VoC -->
+- MIN_REDDIT_QUOTES: 6        <!-- if Reddit MCP is enabled -->
+- MIN_YT_TRANSCRIPTS: 2       <!-- if YouTube MCP is enabled -->
+- MIN_COMPETITORS: 5          <!-- Prompt 2 requirement -->
+- MAX_ITERATIONS: 3           <!-- agent loop upper bound -->
+- GAP_RETRY: true             <!-- keep iterating until gaps close or limit hit -->
+
+### Retrieval Plan (routing)
+1) **Owned data (Firecrawl)** → site, PDPs, FAQ, blog, press.
+2) **Open web (Perplexity)** → forums, reviews, third-party analysis with **citations**.
+3) **Long-tail (Tavily/SerpAPI/Brave)** → fill holes the first pass missed.
+4) **UGC (Reddit / YouTube)** → VoC depth; record direct quotes + links.
+5) **Marketplaces (Apify)** → Amazon/Trustpilot/Judge.me when review-heavy.
+6) **Escalation (Browserbase)** → if page is JS-rendered/infinite scroll or Firecrawl returns blank/truncated.
+
+### Escalation Rules
+- If **Firecrawl** response is empty, duplicated, or truncated → retry with **Apify**.
+- If still incomplete **or** page is clearly JS-rendered (React/Vue/infinite scroll) → escalate to **Browserbase** and capture:
+  - Rendered text,
+  - First-screen screenshot,
+  - URL + timestamp.
+- Tag sources in outputs: `[Firecrawl]`, `[Perplexity]`, `[Tavily]`, `[SerpAPI]`, `[Brave]`, `[Apify]`, `[Browserbase]`, `[Reddit]`, `[YouTube]`, `[CSV]`.
+
+### Quality Gates (must pass before synthesis)
+- `CITATIONS >= MIN_CITATIONS`
+- `DIRECT_QUOTES >= MIN_DIRECT_QUOTES` (mix of CSV, Reddit, marketplace, site testimonials)
+- If Reddit/YouTube enabled: `REDDIT_QUOTES >= MIN_REDDIT_QUOTES` and `YT_TRANSCRIPTS >= MIN_YT_TRANSCRIPTS`
+- Prompt 2 only: `COMPETITORS >= MIN_COMPETITORS`
+- If gates fail and `GAP_RETRY = true` → generate **targeted follow-ups** (e.g., “pricing complaints”, “durability issues”, “return policy anxiety”) and rerun retrieval up to `MAX_ITERATIONS`.
+
+### Evidence Ledger (saved alongside outputs)
+- For each prompt, write `/outputs/{{RUN_DATE}}_{{BRAND_NAME}}/raw/evidence_0X.json` with:
+  - `queries_run`, `tools_used`, `citations`, `quotes`, `screenshots`, `retries`, `gaps_remaining`.
+
 ---
 
 ## Execution Order
@@ -114,6 +165,12 @@ Each step must both **write a full detailed output** to the outputs folder **and
 - Each prompt appends a **summary block** to `/docs/brand_context.md`.  
 - **Naming convention (standardized):**
 /outputs/{{RUN_DATE}}{{BRAND_NAME}}/0X<prompt_shortname>_output.md
+
+### Raw Evidence Persistence
+- Alongside each prompt’s full output, save a machine-readable ledger:
+  - Path: `/outputs/{{RUN_DATE}}_{{BRAND_NAME}}/raw/evidence_0X.json`
+  - Contents: `queries_run`, `tools_used`, `citations`, `quotes`, `screenshots`, `retries`, `gaps_remaining`
+- This ledger is used for QA and to reproduce runs.
 
 ---
 

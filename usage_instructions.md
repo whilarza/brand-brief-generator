@@ -75,7 +75,7 @@ Ensure the outputs folder exists (it can be empty before first run):
 ## 4) Run the Workflow
 
 Open:
-/docs/00_master_workflow.md
+/prompts/00_master_workflow.md
 
 ### ⚙️ Model Selection
 

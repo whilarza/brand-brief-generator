@@ -23,6 +23,20 @@
 
 ---
 
+## Inputs/Instruction for Cursor
+
+1. Validate that all required input files exist before continuing:  
+   - `/outputs/{{YYYY-MM-DD}}_{{BRAND_NAME}}/01_deep_customer_voice_research_output.md`  
+   - `/outputs/{{YYYY-MM-DD}}_{{BRAND_NAME}}/02_competitive_landscape_output.md`  
+   - (and for Prompt 4, also Prompt 3’s output)  
+
+2. If any required input file is missing, stop and return:  
+   `"Missing input(s). Please ensure all required prior outputs are generated before running this prompt."`
+
+3. Only proceed once all required files are confirmed.  
+
+---
+
 ## Report Header Standard
 
 Always begin the report with:
@@ -120,6 +134,17 @@ Deliver as a bulleted list with explanations.
 
 ---
 
+## Evidence Quotas & Iterate
+- Do not finalize until **ALL** apply:
+  - `CITATIONS >= MIN_CITATIONS`
+  - `DIRECT_QUOTES >= MIN_DIRECT_QUOTES`
+  - If Reddit/YouTube are available: `REDDIT_QUOTES >= MIN_REDDIT_QUOTES` and `YT_TRANSCRIPTS >= MIN_YT_TRANSCRIPTS`
+  - Prompt 2 only: `COMPETITORS >= MIN_COMPETITORS`
+- If any quota is unmet, **generate targeted follow-up queries** and repeat retrieval/synthesis up to `MAX_ITERATIONS` or until quotas pass.
+- Log remaining gaps in a **[LIMITATIONS]** section with next best queries to run.
+
+---
+
 ### Step 6 — Iteration Clause (Critical)
 After completing each step:  
 
@@ -136,6 +161,17 @@ After completing each step:
 3. **Funnel-Aligned Content Strategy** (minimum 6 content angles per stage, detailed)  
 4. **12 Conversations Matrix** (12+ detailed starters across quadrants)  
 5. **Tone Guardrails** (3–5 with reasoning + alternatives)  
+
+---
+
+## Copywriter Synthesis Pass (Mandatory)
+Create a **one-page, narrative-style brief** for the creative team:
+- Write in **customer language**; keep quotes verbatim where possible.
+- Include **3 hook-ready headlines** per ICP.
+- Provide **5 objection-handling lines** (headline + 1-sentence proof).
+- Add a **Do/Don’t tone guide** (5 bullets each) tied to emotional triggers.
+Save as:  
+`/outputs/{{RUN_DATE}}_{{BRAND_NAME}}/0X_copywriter_synthesis.md`
 
 ---
 

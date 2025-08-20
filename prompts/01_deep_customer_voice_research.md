@@ -7,6 +7,23 @@ Your role: act as a **market research strategist + voice-of-customer analyst**, 
 
 ---
 
+### MCP Integration & Escalation (Required)
+
+- Route all crawling to **Firecrawl** first.
+- If a target URL returns **empty/partial** content or appears **JS-rendered**, retry via **Apify**; if still partial, **escalate to Browserbase** and capture:
+  - rendered text,
+  - first-screen screenshot,
+  - URL + timestamp (tag `[Browserbase Capture]`).
+- For **VoC depth**, include:
+  - **CSV reviews** `[Customer Reviews CSV]` (primary),
+  - **Reddit** (if enabled) `[Reddit]`,
+  - **YouTube transcripts** (if enabled) `[YouTube]`,
+  - Marketplace reviews via **Apify** `[Apify]`.
+- Use **Perplexity** for synthesis with **citations** and **Tavily/SerpAPI/Brave** for long-tail discovery.
+- Maintain a running **Evidence Ledger** (citations/quotes/tool runs) and save to `/outputs/{{RUN_DATE}}_{{BRAND_NAME}}/raw/`.
+
+---
+
 ## Step 1: Brand Context (Canonical Sources)
 - Pull crawl/search seeds from **`brand_sources.md`**.  
 - Use them as the starting dataset; **do not ask the user for URLs**.  
@@ -43,6 +60,20 @@ Develop 3 distinct ICPs:
 - Treat this as the **primary Voice of Customer dataset**.  
 - Rank recurring phrases by **frequency × emotional intensity**.  
 - Mark them as **[Customer Reviews CSV]** in outputs.  
+
+---
+
+## Step 4B: Voice-of-Customer Enrichment (Qualitative)
+
+- Extract **20–30 recurring phrases** with **frequency × emotional intensity**.  
+- Pull **6+ Reddit quotes** and **2+ YouTube transcript excerpts** (if those MCPs are enabled).  
+- Mark **identity conflicts**, **metaphors**, and explicit **shame/guilt/fear language**.  
+- Add a **Narrative Persona subsection** for each ICP — one tight paragraph *written in their voice* using verbatim snippets.  
+- If quotas are not met, **auto-iterate additional queries** such as:  
+  - “regret after purchase {{category}}”  
+  - “is it worth it {{brand}} review”  
+  - “return policy {{brand}}”  
+  - “durability {{product}}”  
 
 ---
 
@@ -85,6 +116,17 @@ For each ICP, provide:
 
 ---
 
+## Step 6B: Evidence Quotas & Iterate
+- Do not finalize until **ALL** apply:
+  - `CITATIONS >= MIN_CITATIONS`
+  - `DIRECT_QUOTES >= MIN_DIRECT_QUOTES`
+  - If Reddit/YouTube are available: `REDDIT_QUOTES >= MIN_REDDIT_QUOTES` and `YT_TRANSCRIPTS >= MIN_YT_TRANSCRIPTS`
+  - Prompt 2 only: `COMPETITORS >= MIN_COMPETITORS`
+- If any quota is unmet, **generate targeted follow-up queries** and repeat retrieval/synthesis up to `MAX_ITERATIONS` or until quotas pass.
+- Log remaining gaps in a **[LIMITATIONS]** section with next best queries to run.
+
+---
+
 ### Step 7: Iteration Clause (Critical)
 After completing each step:  
 
@@ -102,6 +144,17 @@ After completing each step:
 4. **Metaphors & Identity Conflicts** — explicit bullet list.  
 5. **Emergent Tensions & Strategic Implications**.  
 6. **Missing Source Note** (if any gaps in brand_sources.md).  
+
+---
+
+## Copywriter Synthesis Pass (Mandatory)
+Create a **one-page, narrative-style brief** for the creative team:
+- Write in **customer language**; keep quotes verbatim where possible.
+- Include **3 hook-ready headlines** per ICP.
+- Provide **5 objection-handling lines** (headline + 1-sentence proof).
+- Add a **Do/Don’t tone guide** (5 bullets each) tied to emotional triggers.
+Save as:  
+`/outputs/{{RUN_DATE}}_{{BRAND_NAME}}/0X_copywriter_synthesis.md`
 
 ---
 

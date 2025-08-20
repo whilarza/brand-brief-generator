@@ -13,6 +13,20 @@
 - **Consolidated summary context:**  
   `/docs/brand_context.md`
 
+---
+
+## Inputs/Instruction for Cursor
+
+1. Validate that all required input files exist before continuing:  
+   - `/outputs/{{YYYY-MM-DD}}_{{BRAND_NAME}}/01_deep_customer_voice_research_output.md`  
+   - `/outputs/{{YYYY-MM-DD}}_{{BRAND_NAME}}/02_competitive_landscape_output.md`  
+   - (and for Prompt 4, also Prompt 3’s output)  
+
+2. If any required input file is missing, stop and return:  
+   `"Missing input(s). Please ensure all required prior outputs are generated before running this prompt."`
+
+3. Only proceed once all required files are confirmed.  
+
 **Critical Usage Rule:**  
 - Do **not** proceed unless BOTH full outputs of Prompts 1 and 2 are available.  
 - Use `brand_context.md` only as a **summary lens**, never as a substitute for Prompts 1 and 2.  
@@ -38,7 +52,7 @@ For each segment (**Strangers, Audience Members, Customers**), provide at least 
 - **Crisis/Catalyst:** tipping moments that move them from consideration → action  
 
 **Requirements:**  
-- Ground motivators in **verbatim or near-verbatim language** from Prompt 1 (VoC).  
+- Ground motivators in **verbatim or near-verbatim language** from Prompt 1 (VoC, including the Voice-of-Customer Enrichment outputs).  
 - Cross-reference competitor themes from Prompt 2.  
 - Mark source attribution: `[Prompt 1]`, `[Prompt 2]`, `[CSV Reviews]`, `[External]`.  
 - If a motivator feels generic, run an additional Perplexity query and expand before moving on.  
@@ -51,7 +65,7 @@ Identify at least **5–7 dominant objections**. Present in **table format** wit
 | Objection (Customer’s words) | Emotional Root | Logical Surface Reason | Strategic Response (copy/proof/offer) | Source |
 
 **Rules:**  
-- Emotional root must tie to VoC data (fear of being duped, overwhelm, shame, etc.).  
+- Emotional root must tie to Prompt 1 VoC Enrichment data (fear of being duped, overwhelm, shame, etc.).  
 - Strategic responses must be practical and **ready for copywriting use** (not abstract).  
 - Cite source `[Prompt 1]`, `[Prompt 2]`, `[CSV Reviews]`, `[External]`.  
 - Thin/vague objections must be re-expanded before finalization.  
@@ -155,6 +169,17 @@ File must include:
 
 ---
 
+## Evidence Quotas & Iterate
+- Do not finalize until **ALL** apply:
+  - `CITATIONS >= MIN_CITATIONS`
+  - `DIRECT_QUOTES >= MIN_DIRECT_QUOTES`
+  - If Reddit/YouTube are available: `REDDIT_QUOTES >= MIN_REDDIT_QUOTES` and `YT_TRANSCRIPTS >= MIN_YT_TRANSCRIPTS`
+  - Prompt 2 only: `COMPETITORS >= MIN_COMPETITORS`
+- If any quota is unmet, **generate targeted follow-up queries** and repeat retrieval/synthesis up to `MAX_ITERATIONS` or until quotas pass.
+- Log remaining gaps in a **[LIMITATIONS]** section with next best queries to run.
+
+---
+
 ### Step 8 - Iteration Clause (Critical)
 After completing each step:  
 
@@ -175,3 +200,16 @@ After completing each step:
 6. Summarization appended to `brand_context.md`  
 7. Full detailed output saved to:  
    `/outputs/{{YYYY-MM-DD}}_{{BRAND_NAME}}/03_purchase_motivation_framework_output.md`
+
+---
+
+## Copywriter Synthesis Pass (Mandatory)
+Create a **one-page, narrative-style brief** for the creative team:
+- Write in **customer language**; keep quotes verbatim where possible.
+- Include **3 hook-ready headlines** per ICP.
+- Provide **5 objection-handling lines** (headline + 1-sentence proof).
+- Add a **Do/Don’t tone guide** (5 bullets each) tied to emotional triggers.
+Save as:  
+`/outputs/{{RUN_DATE}}_{{BRAND_NAME}}/0X_copywriter_synthesis.md`
+
+---
