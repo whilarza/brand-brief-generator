@@ -77,6 +77,17 @@ Ensure the outputs folder exists (it can be empty before first run):
 Open:
 /docs/00_master_workflow.md
 
+### ⚙️ Model Selection
+
+Before running, select the model in Cursor:
+
+- **GPT-5** → Recommended for best balance of depth, creativity, and speed.  
+- **Auto** → Cursor automatically selects the most reliable model (safer if you’re unsure).  
+- **Max Mode** → Only needed when your context (sources + CSV + prior outputs) exceeds ~200k tokens.  
+  ⚠️ Slower and more expensive — use only for very large datasets.
+
+If you skip this step, Cursor may default to a lighter model, which can cause thinner, less VoC-rich outputs.
+
 Then run in Cursor:
 /run 00_master_workflow.md
 

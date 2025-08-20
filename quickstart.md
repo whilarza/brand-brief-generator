@@ -43,6 +43,11 @@ review_text, rating, source, author, product, date
 - [ ] Open:
 /docs/00_master_workflow.md
 
+- [ ] In Cursor, **select model**:  
+  - Default: **GPT-5** (recommended for depth + balance)  
+  - Use **Auto** if unsure (Cursor will optimize model for reliability/cost)  
+  - Use **Max Mode** only if your context window is >200k tokens (e.g. huge datasets)
+
 - [ ] Run in Cursor:
 /run 00_master_workflow.md
 
@@ -85,3 +90,25 @@ Files generated:
 - [ ] **Summaries differ from full detail** → This is expected. Summaries cap at ~2 pages; open full outputs in `/outputs/` for complete detail.
 
 ---
+
+## 🌐 Other Runtimes (Non-Cursor)
+
+This repo is **Cursor-first**, but any **MCP-compliant runner** can be used:
+
+- Ensure the following MCP servers are configured with valid API keys:
+  - `firecrawl-mcp`  
+  - `perplexity-mcp`  
+  - `tavily-remote-mcp`  
+  - `apify` (optional)
+
+- Use **GPT-5** or equivalent high-context model.  
+  - Enable extended context if your runtime supports >200k tokens.  
+  - Fallbacks (GPT-4.1, Claude Sonnet, Gemini Pro) may work but often produce thinner outputs.
+
+- Run the workflow script at:  
+  `/docs/00_master_workflow.md`
+
+- Outputs will still be saved in:  
+  `/outputs/{{YYYY-MM-DD}}_{{BRAND_NAME}}/`
+
+- If not using Cursor, replace `/run 00_master_workflow.md` with your runtime’s execution command (e.g., `mcp-run 00_master_workflow.md`).

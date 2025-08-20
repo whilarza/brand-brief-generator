@@ -49,6 +49,27 @@ If MCP calls fail, outputs must explicitly state a `[MISSING DATA: MCP retrieval
 
 ---
 
+## Model Selection (Global Rule)
+
+- All prompts (01–04) must explicitly specify a **model selection** at runtime.  
+- **Default model recommendation:** `GPT-5` (for balanced quality, depth, and cost).  
+- **When to use Max Mode:**  
+  - Only enable Max Mode if the project requires very large context windows (>200k tokens), such as when attaching unusually long brand sources or multi-thousand review datasets.  
+  - Be aware: Max Mode is slower and more expensive.  
+
+### Future-Proofing Guidance
+Because model availability and performance changes over time, this workflow does **not hardcode a single “best model.”**  
+- Teams should review current model benchmarks and pricing quarterly.  
+- Update this section if a newer model (e.g., GPT-5 successor, Claude Opus upgrade, Gemini Pro Max) offers better qualitative reasoning or cost-efficiency.  
+- If uncertain, default to `Auto` mode in Cursor, which dynamically selects the best premium model available.
+
+### Practical Rule of Thumb
+- **Use GPT-5** for deep qualitative research (customer voice, emotional drivers, copywriting insights).  
+- **Use Auto** if unsure — ensures Cursor optimizes for reliability and cost.  
+- **Use Max Mode** only when the context window limit is a hard blocker.  
+
+---
+
 ## Execution Order
 Run the following prompts in sequence.  
 Each step must both **write a full detailed output** to the outputs folder **and** append a **concise summary** to `/docs/brand_context.md`.
@@ -120,9 +141,6 @@ Each step must both **write a full detailed output** to the outputs folder **and
 - If any MCP server fails, deliverables must contain:  
 [MISSING DATA: Firecrawl/Tavily/Perplexity retrieval error]
 
-yaml
-Copy
-Edit
 - Every full output must end with a **Source Traceability Section**, listing references and context used.  
 
 ---

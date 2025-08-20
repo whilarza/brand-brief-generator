@@ -30,6 +30,13 @@ The output should be directly usable by a marketing team to launch campaigns.
 ---
 
 ## Tools & Responsibilities (MCP)
+- **Model Selection (Cursor)**
+  - **GPT-5** → Default / recommended model. Balance of depth, speed, and creativity.  
+  - **Auto** → Cursor selects model automatically. Use if unsure.  
+  - **Max Mode** → Required only when inputs + prior outputs exceed ~200k tokens.  
+    ⚠️ Slower and more expensive — reserve for very large brand runs.  
+
+> ❗ **Rule:** Running on lighter models (e.g., GPT-4.1) may result in **thinner, generic, or incomplete outputs**. Always confirm model choice before executing `/run 00_master_workflow.md`.
 - **Firecrawl MCP**  
   Crawl brand site (homepage, about, PDPs, FAQs, blog). Extract **positioning, claims, tone, proof, structured product info**.
 - **Tavily Remote MCP**  
@@ -156,6 +163,7 @@ If any content is inferred (not directly evidenced), tag it as **_Assumption_** 
 - Ensure headers include **Brand** and **Date**
 - Ensure **Source Traceability** section exists (with link text or path references)
 - Ensure minimum counts are met; if not, add an explicit **[LIMITATION]** note
+- Confirm model setting (GPT-5 or higher). Flag in output header if Max Mode was required.
 
 ---
 
